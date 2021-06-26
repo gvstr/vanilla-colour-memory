@@ -91,7 +91,6 @@ async function checkCards() {
 }
 
 function updatePointsAndMoves() {
-    console.log(`${points} ${moves}`)
     document.getElementById("points").innerHTML = points;
     document.getElementById("moves").innerHTML = moves;
 }
