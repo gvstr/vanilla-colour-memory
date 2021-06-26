@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body onload="onLoad()">
+    <div class="no-show" id="gameFinishedScreen">
+        <p>Game finished!</p>
+        <p>Points:
+        <div id="finish-points">0</div>
+        </p>
+
+        <p>Moves made:
+        <div id="finish-moves">0</div>
+        </p>
+
+        <button id="reloadButton" onclick="reloadPage()">New Game</button>
+
+    </div>
+    <div class="board" onclick="onCardClicked(event)">
+        <div class="row">
+            <div class="card hidden" id="0"></div>
+            <div class="card hidden" id="1"></div>
+            <div class="card hidden" id="2"></div>
+            <div class="card hidden" id="3"></div>
+        </div>
+        <div class="row">
+            <div class="card hidden" id="4"></div>
+            <div class="card hidden" id="5"></div>
+            <div class="card hidden" id="6"></div>
+            <div class="card hidden" id="7"></div>
+        </div>
+        <div class="row">
+            <div class="card hidden" id="8"></div>
+            <div class="card hidden" id="9"></div>
+            <div class="card hidden" id="10"></div>
+            <div class="card hidden" id="11"></div>
+        </div>
+        <div class="row">
+            <div class="card hidden" id="12"></div>
+            <div class="card hidden" id="13"></div>
+            <div class="card hidden" id="14"></div>
+            <div class="card hidden" id="15"></div>
+        </div>
+    </div>
+    <div id="score-board">
+        <p>Points:
+        <div id="points">0</div>
+        </p>
+
+        <p>Moves made:
+        <div id="moves">0</div>
+        </p>
+
+    </div>
+
+    <script src="index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+}
+.row{
+    text-align: center;
+}
+
+.card{
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+}
+
+.card:hover{
+    border: 1px solid black;
+}
+
+.hidden{
+    background-color: #eee
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.no-show{
+    display: none;
+}
