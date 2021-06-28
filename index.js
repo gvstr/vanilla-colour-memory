@@ -10,7 +10,7 @@ function onLoad() {
     cards = createArrayOfCards(colours);
 }
 
-function getArrayOfColours(amount){
+function getArrayOfColours(amount) {
     // will return too many items if uneven amount
     let colours = [];
     while (colours.length < amount) {
@@ -25,20 +25,17 @@ function getArrayOfColours(amount){
 
 function shuffleArray(array) {
     // Fisher-yates shuffle
-    let currentIndex = array.length, randomIndex;
-    while (0 !== currentIndex) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-
-        [array[currentIndex], array[randomIndex]] = [
-            array[randomIndex],
-            array[currentIndex],
-        ];
+    let i = array.length, randomIndex, swap;
+    while (--i > 0) {
+        randomIndex = Math.floor(Math.random() * (i + 1));
+        swap = array[randomIndex];
+        array[randomIndex] = array[i];
+        array[i] = swap;
     }
     return array;
 }
 
-function createArrayOfCards(colours){
+function createArrayOfCards(colours) {
     let cards = [];
     colours.forEach((c, i) => {
         cards.push({ id: i, colour: c, hidden: true, enabled: true })
@@ -106,13 +103,13 @@ function updatePointsAndMoves() {
 }
 
 function SetUIToGameFinished() {
-        document.getElementById("gameFinishedScreen").classList.remove("no-show")
-        document.getElementById("score-board").classList.add("no-show")
-        document.getElementById("finish-points").innerHTML = points;
-        document.getElementById("finish-moves").innerHTML = moves;
+    document.getElementById("gameFinishedScreen").classList.remove("no-show")
+    document.getElementById("score-board").classList.add("no-show")
+    document.getElementById("finish-points").innerHTML = points;
+    document.getElementById("finish-moves").innerHTML = moves;
 }
 
-function isGameFinished(input){
+function isGameFinished(input) {
     return input.every(x => { return !x.enabled; });
 }
 
