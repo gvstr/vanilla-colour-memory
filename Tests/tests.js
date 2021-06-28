@@ -72,3 +72,16 @@ describe('delay(ms)', () => {
         expect(true).to.be.true;
     }).timeout(allowedTime); //default mocha timeout = 2000
 });
+
+describe('getSelectedCards())', () => {
+    it('should return all cards that are enabled and not hidden', async () => {
+        let input = [
+            {hidden:false, enabled: true},
+            {hidden:true, enabled: true},
+            {hidden:false, enabled: false}
+        ]
+        let result = getSelectedCards(input);
+        await delay(delayTimeInMs);
+        expect(result.length).to.equal(1);
+    })
+});

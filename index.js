@@ -10,6 +10,10 @@ function onLoad() {
     cards = createCards(colours);
 }
 
+function getRandomColourString() {
+    return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+}
+
 function getArrayOfRandomColourPairs(amount) {
     let colours = [];
     while (colours.length < amount) {
@@ -42,10 +46,6 @@ function createCards(colours) {
     return cards;
 }
 
-function getRandomColourString() {
-    return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-}
-
 function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -69,7 +69,7 @@ function onCardClicked(event) {
 
 async function checkCards() {
     activeBoard = false;
-    let selectedCards = cards.filter(x => !x.hidden && x.enabled);
+    let selectedCards = getSelectedCards(cards);
     if (selectedCards.length > 1) {
         if (selectedCards[0].colour === selectedCards[1].colour) {
             points++;
@@ -92,6 +92,10 @@ async function checkCards() {
     }
 
     activeBoard = true;
+}
+
+function getSelectedCards(cards){
+    return cards.filter(x => !x.hidden && x.enabled);
 }
 
 function disableCards(cards) {
