@@ -3,13 +3,13 @@ const expect = chai.expect;
 const match = chai.match;
 const assert = chai.assert;
 
-describe('getArrayOfColours(amount)', () => {
+describe('getArrayOfRandomColourPairs(amount)', () => {
     it('should return an array with length same as amount', () => {
-        let result = getArrayOfColours(8);
+        let result = getArrayOfRandomColourPairs(8);
         expect(result.length).to.equal(8)
     })
     it('should always return an even amount of items', () => {
-        let result = getArrayOfColours(7);
+        let result = getArrayOfRandomColourPairs(7);
         expect(result.length).to.equal(8)
     })
 });
@@ -25,10 +25,10 @@ describe('shuffleArray(array)', () => {
     })
 });
 
-describe('createArrayOfCards(colours)', () => {
+describe('createCards(colours)', () => {
     it('returns an array with the same amount of items as supplied', () => {
         let originalArray = ["#eee","#eee","#eee"];
-        let result = createArrayOfCards(originalArray);
+        let result = createCards(originalArray);
         expect(originalArray.length).to.equal(result.length)
     })
 });

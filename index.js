@@ -5,13 +5,12 @@ let points = 0;
 let moves = 0;
 
 function onLoad() {
-    let colours = getArrayOfColours(16);
+    let colours = getArrayOfRandomColourPairs(16);
     shuffleArray(colours);
-    cards = createArrayOfCards(colours);
+    cards = createCards(colours);
 }
 
-function getArrayOfColours(amount) {
-    // will return too many items if uneven amount
+function getArrayOfRandomColourPairs(amount) {
     let colours = [];
     while (colours.length < amount) {
         let newColour = getRandomColourString();
@@ -35,7 +34,7 @@ function shuffleArray(array) {
     return array;
 }
 
-function createArrayOfCards(colours) {
+function createCards(colours) {
     let cards = [];
     colours.forEach((c, i) => {
         cards.push({ id: i, colour: c, hidden: true, enabled: true })
@@ -62,9 +61,7 @@ function onCardClicked(event) {
         if (cards[id].hidden = false) {
             return;
         }
-        //reveal card
-        document.getElementById(id).style.backgroundColor = cards[id].colour;
-        cards[id].hidden = false;
+        revealCard(cards[id]);
 
         checkCards();
     }
@@ -78,23 +75,42 @@ async function checkCards() {
             points++;
             moves++;
             await delay(delayTimeInMs)
-            document.getElementById(selectedCards[0].id).classList.add("disabled");
-            document.getElementById(selectedCards[1].id).classList.add("disabled");
-            selectedCards[0].enabled = false;
-            selectedCards[1].enabled = false;
+            disableCards(selectedCards);
         }
         else {
             points--;
             moves++;
             await delay(delayTimeInMs);
-            document.getElementById(selectedCards[0].id).style.backgroundColor = "#eee";
-            document.getElementById(selectedCards[1].id).style.backgroundColor = "#eee";
-            selectedCards[0].hidden = true;
-            selectedCards[1].hidden = true;
+            hideCards(selectedCards);
         }
     }
     updatePointsAndMoves();
-    isGameFinished(cards) ? SetUIToGameFinished() : activeBoard = true;
+
+    if (isGameFinished(cards)) {
+        setUIToGameFinished()
+        return;
+    }
+
+    activeBoard = true;
+}
+
+function disableCards(cards) {
+    cards.forEach(x => {
+        document.getElementById(x.id).classList.add("disabled");
+        x.enabled = false;
+    })
+}
+
+function hideCards(cards) {
+    cards.forEach(x => {
+        document.getElementById(x.id).style.backgroundColor = "#eee";
+        x.hidden = true;
+    })
+}
+
+function revealCard(card) {
+    document.getElementById(card.id).style.backgroundColor = card.colour;
+    card.hidden = false;
 }
 
 function updatePointsAndMoves() {
@@ -102,7 +118,7 @@ function updatePointsAndMoves() {
     document.getElementById("moves").innerHTML = moves;
 }
 
-function SetUIToGameFinished() {
+function setUIToGameFinished() {
     document.getElementById("gameFinishedScreen").classList.remove("no-show")
     document.getElementById("score-board").classList.add("no-show")
     document.getElementById("finish-points").innerHTML = points;
